@@ -1,5 +1,4 @@
 def skill_gap(skills):
-
     required = [
         "Python",
         "SQL",
@@ -14,6 +13,3 @@ def skill_gap(skills):
             missing.append(skill)
 
     return missing
-skills = st.text_input(
-    "Enter Skills"
-).split(",")
