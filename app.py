@@ -1,4 +1,6 @@
 import streamlit as st
+from agents.internship_agent import get_internships
+from agents.roadmap_agent import skill_gap
 
 st.set_page_config(
     page_title="InternAI",
@@ -40,7 +42,9 @@ if option == "Resume Analyzer":
 # Internship Finder
 elif option == "Internship Finder":
     st.header("💼 Internship Finder")
-    st.write("Recommended internships will appear here.")
+
+    df = get_internships()
+    st.dataframe(df)
 
 # Interview Coach
 elif option == "Interview Coach":
@@ -58,11 +62,16 @@ elif option == "Interview Coach":
 elif option == "Skill Gap Analysis":
     st.header("📊 Skill Gap Analysis")
 
-    skills = st.text_area("Enter Your Skills")
+    skills = st.text_input(
+        "Enter Skills (comma separated)"
+    )
 
-    if st.button("Analyze Skills"):
-        st.write("Skills entered:")
-        st.write(skills)
+    if st.button("Analyze"):
+        user_skills = [s.strip() for s in skills.split(",")]
+        missing = skill_gap(user_skills)
+
+        st.write("Missing Skills:")
+        st.write(missing)
 
 # Career Roadmap
 elif option == "Career Roadmap":
