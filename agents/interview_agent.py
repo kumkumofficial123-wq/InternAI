@@ -6,3 +6,7 @@ def interview_questions():
         "Explain Python lists",
         "What is SQL?"
     ]
+memory = {
+    "skills": [],
+    "goal": ""
+}
